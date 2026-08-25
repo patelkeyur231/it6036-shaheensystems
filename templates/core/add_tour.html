@@ -1,0 +1,22 @@
+{% extends 'core/base.html' %}
+{% load form_extras %}
+{% block title %}Add Tour{% endblock %}
+{% block content %}
+    <h1 class="mb-4">Add Tour</h1>
+
+    <form method="post" class="col-md-6">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="mb-3">
+                <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field|add_class:"form-control" }}
+                {% if field.errors %}
+                    <div class="text-danger small">{{ field.errors }}</div>
+                {% endif %}
+            </div>
+        {% endfor %}
+        <button type="submit" class="btn btn-primary">Save Tour</button>
+    </form>
+
+    <a href="{% url 'tour_list' %}" class="btn btn-outline-secondary mt-4">Back to Tours</a>
+{% endblock %}

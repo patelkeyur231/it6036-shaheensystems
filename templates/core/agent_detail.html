@@ -1,0 +1,13 @@
+{% extends 'core/base.html' %}
+{% block title %}{{ agent.user.username }}{% endblock %}
+{% block content %}
+    <div class="card">
+        <div class="card-body">
+            <h1 class="card-title">{{ agent.user.username }}</h1>
+            <p class="card-text"><strong>Position:</strong> {{ agent.position }}</p>
+            <p class="card-text"><strong>Department:</strong> {{ agent.department }}</p>
+        </div>
+    </div>
+
+    <a href="{% url 'agent_list' %}" class="btn btn-outline-secondary mt-4">Back to Agents</a>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'core/base.html' %}
+{% block title %}All Tours{% endblock %}
+{% block content %}
+    <h1 class="mb-4">All Tours</h1>
+
+    {% if tours %}
+        <div class="list-group">
+            {% for tour in tours %}
+                <a href="{% url 'tour_detail' tour.id %}" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+                    {{ tour.title }}
+                    <span class="badge bg-primary rounded-pill">${{ tour.price }}</span>
+                </a>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p class="text-muted">No tours available.</p>
+    {% endif %}
+
+    <a href="{% url 'home' %}" class="btn btn-outline-secondary mt-4">Back to Home</a>
+{% endblock %}

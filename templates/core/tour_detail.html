@@ -1,0 +1,25 @@
+{% extends 'core/base.html' %}
+{% block title %}{{ tour.title }}{% endblock %}
+{% block content %}
+    <div class="card">
+        <div class="card-body">
+            <h1 class="card-title">{{ tour.title }}</h1>
+            <p class="card-text">{{ tour.description }}</p>
+            <p class="card-text"><strong>Price:</strong> ${{ tour.price }}</p>
+            <p class="card-text"><strong>Agent:</strong> {{ tour.agent.user.username }}</p>
+
+            {% if user.is_authenticated %}
+                {% for group in user.groups.all %}
+                    {% if group.name == 'Administrators' or group.name == 'Managers' %}
+                        <a href="{% url 'edit_tour' tour.id %}" class="btn btn-warning">Edit This Tour</a>
+                    {% endif %}
+                    {% if group.name == 'Agents' and user.agent == tour.agent %}
+                        <a href="{% url 'edit_tour' tour.id %}" class="btn btn-warning">Edit This Tour</a>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+
+    <a href="{% url 'tour_list' %}" class="btn btn-outline-secondary mt-4">Back to Tours</a>
+{% endblock %}
